@@ -1,4 +1,5 @@
 export interface UserProgress {
+    username: string;
     xp: number;
     level: number;
     streak: number;
@@ -7,6 +8,7 @@ export interface UserProgress {
 }
 
 const DEFAULT_PROGRESS: UserProgress = {
+    username: 'Esploratore',
     xp: 0,
     level: 1,
     streak: 0,
@@ -45,6 +47,13 @@ export const addXp = (amount: number): UserProgress => {
         // Eventuale sblocco nuovi esercizi in base al livello utente
     }
 
+    saveProgress(current);
+    return current;
+};
+
+export const setUsername = (name: string): UserProgress => {
+    const current = getProgress();
+    current.username = name;
     saveProgress(current);
     return current;
 };
