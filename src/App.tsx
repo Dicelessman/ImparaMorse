@@ -36,6 +36,13 @@ function App() {
 
   const handleLevelComplete = (bonusXp: number = 0) => {
     if (bonusXp > 0) handleAddXp(bonusXp);
+
+    // Sempre sblocca il livello successivo quando un esercizio viene completato
+    if (currentLevel !== null) {
+      unlockLevel(currentLevel + 1);
+      setProgress(getProgress()); // Ricarica i progressi per riflettere lo sblocco
+    }
+
     setCurrentLevel(null);
   };
 
