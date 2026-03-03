@@ -17,13 +17,17 @@ interface Props {
 
 export const Dashboard: React.FC<Props> = ({ progress, onSelectLevel }) => {
     return (
-        <div className="flex-1 flex flex-col p-6 mt-16 pb-24">
-            <header className="mb-8 mt-4 text-center">
-                <h1>ImparaMorse</h1>
-                <p className="text-lg opacity-80 mt-2 text-blue-200">Diventa fluente, un tap alla volta.</p>
+        <div className="flex-1 flex flex-col p-6 mt-10 pb-24 w-full max-w-2xl mx-auto">
+            <header className="mb-12 text-center animate-popIn">
+                <h1 className="text-5xl font-black mb-2 text-transparent bg-clip-text bg-gradient-to-br from-blue-400 via-purple-500 to-blue-600 drop-shadow-[0_0_15px_rgba(59,130,246,0.5)]">
+                    ImparaMorse
+                </h1>
+                <p className="text-lg font-medium text-blue-200/80 uppercase tracking-widest mt-4">
+                    Diventa fluente, un tap alla volta.
+                </p>
             </header>
 
-            <main className="flex-1 overflow-y-auto space-y-6">
+            <main className="flex-1 overflow-y-visible space-y-6 relative">
                 {LEVELS.map((level, index) => {
                     const isUnlocked = progress.unlockedLevels.includes(level.id);
                     const isNext = !isUnlocked && (index === 0 || progress.unlockedLevels.includes(LEVELS[index - 1].id));
@@ -31,40 +35,41 @@ export const Dashboard: React.FC<Props> = ({ progress, onSelectLevel }) => {
                     return (
                         <div
                             key={level.id}
+                            style={{ animationDelay: `${index * 100}ms` }}
                             onClick={() => {
                                 if (isUnlocked) onSelectLevel(level.id);
                             }}
                             className={`
-                              relative p-5 rounded-2xl border transition-all duration-300
+                              relative p-6 rounded-3xl border transition-all duration-300 animate-slideUp
                               ${isUnlocked
-                                    ? 'bg-slate-800/80 border-blue-500/30 shadow-[0_4px_20px_rgba(59,130,246,0.15)] cursor-pointer hover:border-blue-400 hover:transform hover:-translate-y-1'
+                                    ? 'bg-slate-800/80 border-blue-500/40 shadow-[0_10px_30px_rgba(59,130,246,0.15)] cursor-pointer hover:border-blue-400 hover:shadow-[0_10px_40px_rgba(59,130,246,0.3)] hover:-translate-y-2'
                                     : isNext
                                         ? 'bg-slate-800/50 border-gray-600/50 opacity-80'
-                                        : 'bg-slate-900/50 border-gray-800/50 opacity-50 grayscale'
+                                        : 'bg-slate-900/50 border-gray-800/50 opacity-50 grayscale hover:grayscale-0 transition-grayscale'
                                 }
                           `}
                         >
                             {/* Elemento linea per connettere la roadmap visivamente */}
                             {index !== LEVELS.length - 1 && (
-                                <div className={`absolute top-full left-8 w-1 h-6 -ml-px ${isUnlocked && progress.unlockedLevels.includes(LEVELS[index + 1].id) ? 'bg-blue-500/50' : 'bg-gray-800'}`}></div>
+                                <div className={`absolute top-full left-10 w-1 h-6 -ml-px z-[-1] transition-colors duration-500 ${isUnlocked && progress.unlockedLevels.includes(LEVELS[index + 1].id) ? 'bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.5)]' : 'bg-gray-800'}`}></div>
                             )}
 
-                            <div className="flex items-center gap-4">
+                            <div className="flex items-center gap-6">
                                 <div className={`
-                                  w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl shrink-0
-                                  ${isUnlocked ? 'bg-blue-600 text-white shadow-[0_0_15px_rgba(59,130,246,0.5)]' : 'bg-gray-800 text-gray-500'}
-                              `}>
+                                  w-14 h-14 rounded-2xl flex items-center justify-center font-black text-2xl shrink-0 transition-colors
+                                  ${isUnlocked ? 'bg-gradient-to-br from-blue-500 to-purple-600 text-white shadow-[0_0_20px_rgba(59,130,246,0.6)]' : 'bg-gray-800 text-gray-500'}
+                                `}>
                                     {level.id}
                                 </div>
                                 <div className="flex-1">
-                                    <h3 className={`font-bold text-lg ${isUnlocked ? 'text-white' : 'text-gray-400'}`}>
+                                    <h3 className={`font-bold text-xl mb-1 ${isUnlocked ? 'text-white drop-shadow-md' : 'text-gray-400'}`}>
                                         {level.title}
                                     </h3>
-                                    <p className="text-sm text-gray-400 mt-1">{level.description}</p>
+                                    <p className="text-sm text-gray-400 font-medium leading-relaxed">{level.description}</p>
                                 </div>
 
                                 {!isUnlocked && isNext && (
-                                    <div className="text-xs bg-gray-800 px-3 py-1 rounded-full text-gray-300 flex items-center gap-1">
+                                    <div className="text-xs font-bold bg-slate-700 border border-slate-600 px-3 py-1 rounded-full text-blue-300 flex items-center shadow-inner">
                                         🔒 In arrivo
                                     </div>
                                 )}
