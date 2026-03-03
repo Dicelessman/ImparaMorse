@@ -85,6 +85,7 @@ h1 {
   line-height: 1.1;
   background: linear-gradient(135deg, #fff, var(--color-text-muted));
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-bottom: 0.5rem;
 }
@@ -260,20 +261,86 @@ p {
   position: relative;
 }
 
-/* 3D Flip Card Utilities */
-.perspective-1000 {
-  perspective: 1000px;
+/* Level Card Color Variants - Guaranteed to work without Tailwind */
+.level-card-blue {
+  border-color: rgba(59, 130, 246, 0.4);
+  box-shadow: 0 10px 30px rgba(59, 130, 246, 0.15);
 }
 
-.transform-style-3d {
-  transform-style: preserve-3d;
+.level-card-blue:hover {
+  border-color: #60a5fa;
+  box-shadow: 0 10px 40px rgba(59, 130, 246, 0.3);
 }
 
-.backface-hidden {
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
+.level-icon-blue {
+  background: linear-gradient(135deg, #3b82f6, #4f46e5);
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.6);
 }
 
-.rotate-y-180 {
-  transform: rotateY(180deg);
+.level-card-green {
+  border-color: rgba(16, 185, 129, 0.4);
+  box-shadow: 0 10px 30px rgba(16, 185, 129, 0.15);
+}
+
+.level-card-green:hover {
+  border-color: #34d399;
+  box-shadow: 0 10px 40px rgba(16, 185, 129, 0.3);
+}
+
+.level-icon-green {
+  background: linear-gradient(135deg, #10b981, #059669);
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.6);
+}
+
+.level-card-yellow {
+  border-color: rgba(245, 158, 11, 0.4);
+  box-shadow: 0 10px 30px rgba(245, 158, 11, 0.15);
+}
+
+.level-card-yellow:hover {
+  border-color: #fbbf24;
+  box-shadow: 0 10px 40px rgba(245, 158, 11, 0.3);
+}
+
+.level-icon-yellow {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.6);
+}
+
+.level-card-red {
+  border-color: rgba(239, 68, 68, 0.4);
+  box-shadow: 0 10px 30px rgba(239, 68, 68, 0.15);
+}
+
+.level-card-red:hover {
+  border-color: #f87171;
+  box-shadow: 0 10px 40px rgba(239, 68, 68, 0.3);
+}
+
+.level-icon-red {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.6);
+}
+
+.level-card-purple {
+  border-color: rgba(168, 85, 247, 0.4);
+  box-shadow: 0 10px 30px rgba(168, 85, 247, 0.15);
+}
+
+.level-card-purple:hover {
+  border-color: #c084fc;
+  box-shadow: 0 10px 40px rgba(168, 85, 247, 0.3);
+}
+
+.level-icon-purple {
+  background: linear-gradient(135deg, #a855f7, #9333ea);
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.6);
+}
+
+.animate-popIn {
+  animation: popIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animate-slideUp {
+  animation: popIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
 }

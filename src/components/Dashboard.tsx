@@ -17,46 +17,12 @@ interface Props {
     onSelectLevel: (levelId: number) => void;
 }
 
-// Helper per i colori dinamici della Tailwind (visto che stiamo usando classi arbitrarie)
+// Helper per i colori dinamici (usiamo classi CSS custom definite in index.css)
 const getColorMap = (color: string) => {
-    switch (color) {
-        case 'blue': return {
-            bgGradient: 'from-blue-500 to-indigo-600',
-            border: 'border-blue-500/40 hover:border-blue-400',
-            shadow: 'shadow-[0_10px_30px_rgba(59,130,246,0.15)] hover:shadow-[0_10px_40px_rgba(59,130,246,0.3)]',
-            iconShadow: 'shadow-[0_0_20px_rgba(59,130,246,0.6)]'
-        };
-        case 'green': return {
-            bgGradient: 'from-emerald-400 to-green-600',
-            border: 'border-green-500/40 hover:border-green-400',
-            shadow: 'shadow-[0_10px_30px_rgba(16,185,129,0.15)] hover:shadow-[0_10px_40px_rgba(16,185,129,0.3)]',
-            iconShadow: 'shadow-[0_0_20px_rgba(16,185,129,0.6)]'
-        };
-        case 'yellow': return {
-            bgGradient: 'from-amber-400 to-orange-600',
-            border: 'border-amber-500/40 hover:border-amber-400',
-            shadow: 'shadow-[0_10px_30px_rgba(245,158,11,0.15)] hover:shadow-[0_10px_40px_rgba(245,158,11,0.3)]',
-            iconShadow: 'shadow-[0_0_20px_rgba(245,158,11,0.6)]'
-        };
-        case 'red': return {
-            bgGradient: 'from-rose-400 to-red-600',
-            border: 'border-red-500/40 hover:border-red-400',
-            shadow: 'shadow-[0_10px_30px_rgba(239,68,68,0.15)] hover:shadow-[0_10px_40px_rgba(239,68,68,0.3)]',
-            iconShadow: 'shadow-[0_0_20px_rgba(239,68,68,0.6)]'
-        };
-        case 'purple': return {
-            bgGradient: 'from-purple-500 to-fuchsia-600',
-            border: 'border-purple-500/40 hover:border-purple-400',
-            shadow: 'shadow-[0_10px_30px_rgba(168,85,247,0.15)] hover:shadow-[0_10px_40px_rgba(168,85,247,0.3)]',
-            iconShadow: 'shadow-[0_0_20px_rgba(168,85,247,0.6)]'
-        };
-        default: return {
-            bgGradient: 'from-gray-500 to-gray-600',
-            border: 'border-gray-500/40 hover:border-gray-400',
-            shadow: '',
-            iconShadow: ''
-        };
-    }
+    return {
+        card: `level-card-${color}`,
+        icon: `level-icon-${color}`
+    };
 };
 
 export const Dashboard: React.FC<Props> = ({ progress, onSelectLevel }) => {
@@ -132,7 +98,7 @@ export const Dashboard: React.FC<Props> = ({ progress, onSelectLevel }) => {
                             className={`
                               relative p-6 rounded-3xl border transition-all duration-300 animate-slideUp
                               ${isUnlocked
-                                    ? `bg-slate-800/80 cursor-pointer hover:-translate-y-2 ${colors.border} ${colors.shadow}`
+                                    ? `bg-slate-800/80 cursor-pointer hover:-translate-y-2 ${colors.card}`
                                     : isNext
                                         ? 'bg-slate-800/50 border-gray-600/50 opacity-80'
                                         : 'bg-slate-900/50 border-gray-800/50 opacity-50 grayscale hover:grayscale-0 transition-grayscale'
@@ -147,7 +113,7 @@ export const Dashboard: React.FC<Props> = ({ progress, onSelectLevel }) => {
                             <div className="flex items-center gap-6">
                                 <div className={`
                                   w-14 h-14 rounded-2xl flex items-center justify-center font-black text-2xl shrink-0 transition-colors
-                                  ${isUnlocked ? `bg-gradient-to-br ${colors.bgGradient} text-white ${colors.iconShadow}` : 'bg-gray-800 text-gray-500'}
+                                  ${isUnlocked ? `${colors.icon} text-white` : 'bg-gray-800 text-gray-500'}
                                 `}>
                                     {level.id}
                                 </div>
