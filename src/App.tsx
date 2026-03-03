@@ -18,20 +18,24 @@ function App() {
   const [currentLevel, setCurrentLevel] = useState<number | null>(null);
   const [gameEvent, setGameEvent] = useState<GamificationEvent | null>(null);
 
-  const handleLevelComplete = (xpGained: number) => {
+  const handleAddXp = (amount: number) => {
+    if (amount <= 0) return;
     const oldLevel = progress.level;
-
-    let newProgress = addXp(xpGained);
+    const newProgress = addXp(amount);
 
     if (newProgress.level > oldLevel) {
-      setGameEvent({ type: 'levelUP', amount: xpGained, message: 'Hai sbloccato nuove sfide!' });
-      // Sblocca il livello successivo in base al level up
-      newProgress = unlockLevel(currentLevel! + 1);
+      setGameEvent({ type: 'levelUP', amount, message: 'Hai sbloccato nuove sfide!' });
+      unlockLevel(currentLevel! + 1);
     } else {
-      setGameEvent({ type: 'xp', amount: xpGained, message: 'Ottimo lavoro!' });
+      if (amount >= 10) {
+        setGameEvent({ type: 'xp', amount, message: '+XP' });
+      }
     }
+    setProgress(getProgress());
+  };
 
-    setProgress(newProgress);
+  const handleLevelComplete = (bonusXp: number = 0) => {
+    if (bonusXp > 0) handleAddXp(bonusXp);
     setCurrentLevel(null);
   };
 
@@ -41,18 +45,19 @@ function App() {
     }
 
     let ExerciseComponent = null;
+    const props = { onComplete: handleLevelComplete, onAddXp: handleAddXp };
 
     switch (currentLevel) {
-      case 1: ExerciseComponent = <FlashcardsLevel onComplete={handleLevelComplete} />; break;
-      case 2: ExerciseComponent = <SyllableMethodLevel onComplete={handleLevelComplete} />; break;
-      case 3: ExerciseComponent = <ListeningLevel onComplete={handleLevelComplete} />; break;
-      case 4: ExerciseComponent = <TransmissionLevel onComplete={handleLevelComplete} />; break;
-      case 5: ExerciseComponent = <DecodingQuotesLevel onComplete={handleLevelComplete} />; break;
+      case 1: ExerciseComponent = <FlashcardsLevel {...props} />; break;
+      case 2: ExerciseComponent = <SyllableMethodLevel {...props} />; break;
+      case 3: ExerciseComponent = <ListeningLevel {...props} />; break;
+      case 4: ExerciseComponent = <TransmissionLevel {...props} />; break;
+      case 5: ExerciseComponent = <DecodingQuotesLevel {...props} />; break;
       default: ExerciseComponent = <div className="p-8 text-center text-gray-400">Livello in costruzione</div>;
     }
 
     return (
-      <div className="flex-1 flex flex-col items-center">
+      <div className="flex-1 flex flex-col items-center overflow-x-hidden">
         <header className="p-4 flex items-center gap-4 bg-slate-900/80 backdrop-blur-md sticky top-0 z-30 border-b border-gray-800 w-full max-w-md">
           <button
             className="p-2 -ml-2 rounded-full hover:bg-slate-800 transition-colors"

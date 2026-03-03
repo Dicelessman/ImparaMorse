@@ -1,24 +1,33 @@
 :root {
   /* Colors - Vibrant and attractive for gamification */
-  --color-bg-dark: #0f172a;      /* Slate 900 */
-  --color-bg-darker: #020617;    /* Slate 950 */
-  
-  --color-primary: #3b82f6;      /* Blue 500 */
+  --color-bg-dark: #0f172a;
+  /* Slate 900 */
+  --color-bg-darker: #020617;
+  /* Slate 950 */
+
+  --color-primary: #3b82f6;
+  /* Blue 500 */
   --color-primary-glow: rgba(59, 130, 246, 0.5);
-  
-  --color-success: #10b981;      /* Emerald 500 */
+
+  --color-success: #10b981;
+  /* Emerald 500 */
   --color-success-glow: rgba(16, 185, 129, 0.5);
-  
-  --color-warning: #f59e0b;      /* Amber 500 */
-  
-  --color-error: #ef4444;        /* Red 500 */
+
+  --color-warning: #f59e0b;
+  /* Amber 500 */
+
+  --color-error: #ef4444;
+  /* Red 500 */
   --color-error-glow: rgba(239, 68, 68, 0.5);
-  
-  --color-surface: rgba(30, 41, 59, 0.7); /* Slate 800 with opacity */
+
+  --color-surface: rgba(30, 41, 59, 0.7);
+  /* Slate 800 with opacity */
   --color-surface-light: rgba(51, 65, 85, 0.8);
 
-  --color-text: #f8fafc;         /* Slate 50 */
-  --color-text-muted: #94a3b8;   /* Slate 400 */
+  --color-text: #f8fafc;
+  /* Slate 50 */
+  --color-text-muted: #94a3b8;
+  /* Slate 400 */
 
   /* Shadows for glassmorphism */
   --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
@@ -27,7 +36,7 @@
   /* Animation */
   --transition-fast: 0.15s ease-out;
   --transition-normal: 0.3s ease;
-  
+
   font-family: 'Inter', -apple-system, system-ui, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -172,8 +181,15 @@ p {
 
 /* Animations */
 @keyframes popIn {
-  0% { opacity: 0; transform: scale(0.9) translateY(10px); }
-  100% { opacity: 1; transform: scale(1) translateY(0); }
+  0% {
+    opacity: 0;
+    transform: scale(0.9) translateY(10px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
 }
 
 .animate-pop-in {
@@ -181,9 +197,17 @@ p {
 }
 
 @keyframes pulseBorder {
-  0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
-  70% { box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+  0% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7);
+  }
+
+  70% {
+    box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+  }
 }
 
 .pulse {
@@ -191,14 +215,65 @@ p {
 }
 
 /* Utilities */
-.text-center { text-align: center; }
-.mt-4 { margin-top: 1rem; }
-.mb-4 { margin-bottom: 1rem; }
-.flex-col { display: flex; flex-direction: column; }
-.gap-2 { gap: 0.5rem; }
-.gap-4 { gap: 1rem; }
-.items-center { align-items: center; }
-.justify-center { justify-content: center; }
-.flex-1 { flex: 1; }
-.w-full { width: 100%; }
-.relative { position: relative; }
+.text-center {
+  text-align: center;
+}
+
+.mt-4 {
+  margin-top: 1rem;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.gap-2 {
+  gap: 0.5rem;
+}
+
+.gap-4 {
+  gap: 1rem;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.relative {
+  position: relative;
+}
+
+/* 3D Flip Card Utilities */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
